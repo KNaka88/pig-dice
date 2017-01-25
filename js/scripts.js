@@ -41,8 +41,42 @@ $(document).ready(function(){
 
 
   //Player Object (get name from user input)
-  var player1 = new Player("Calvin");
-  var player2 = new Player("Koji");
+$("form#nameInput").submit(function(event) {
+  var namePlayer1 = $("#name1").val();
+  var namePlayer2 = $("#name2").val();
+  var playTo = parseInt($("#playTo").val());
+  alert(playTo);
+
+  var player1 = new Player(namePlayer1);
+  var player2 = new Player(namePlayer2);
+
+  do {
+    //player1
+    alert(player1.name + ", your turn.");
+    player1.totalScore += rollLoop();
+    alert(player1.name + "'s total score: " + player1.totalScore );
+    if(player1.totalScore >= playTo){
+      win = false;
+      alert(player1.name + " win!!");
+      break;
+    }
+
+    //player2
+    alert(player2.name + ", your turn.");
+    player2.totalScore += rollLoop();
+    alert(player2.name + "'s total score: " + player2.totalScore );
+    if(player2.totalScore >= playTo){
+      win = false;
+      alert(player2.name + " win!!");
+      break;
+    }
+  }while(player1.totalScore < playTo  && player2.totalScore < playTo);
+
+
+
+
+  event.preventDefault();
+})
 
 
 
@@ -57,32 +91,7 @@ $(document).ready(function(){
 
   //User Interface Logics
 
-    // do{
-    //   rollLoop();
-    // } while(player1.totalScore <=10)
 
-
-  do {
-    //player1
-    alert(player1.name + ", your turn.");
-    player1.totalScore += rollLoop();
-    alert(player1.name + "'s total score: " + player1.totalScore );
-    if(player1.totalScore >= 20){
-      win = false;
-      alert(player1.name + " win!!");
-      break;
-    }
-
-    //player2
-    alert(player2.name + ", your turn.");
-    player2.totalScore += rollLoop();
-    alert(player2.name + "'s total score: " + player2.totalScore );
-    if(player2.totalScore >= 20){
-      win = false;
-      alert(player2.name + " win!!");
-      break;
-    }
-  }while(player1.totalScore < 20  && player2.totalScore < 20);
 
 
 });
