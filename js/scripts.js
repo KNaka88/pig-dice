@@ -27,7 +27,7 @@ $(document).ready(function(){
       }
     } while(hold)
 
-    alert("rollTotall:" + rollTotal);
+    alert("Roll Total:" + rollTotal);
     return rollTotal;
   }
   //////
@@ -64,20 +64,25 @@ $(document).ready(function(){
 
   do {
     //player1
+    alert(player1.name + ", your turn.");
     player1.totalScore += rollLoop();
-    alert("Player1.totalScore: " + player1.totalScore );
+    alert(player1.name + "'s total score: " + player1.totalScore );
     if(player1.totalScore >= 20){
       win = false;
+      alert(player1.name + " win!!");
       break;
     }
 
     //player2
+    alert(player2.name + ", your turn.");
     player2.totalScore += rollLoop();
-    alert("Player2.totalScore: " + player2.totalScore );
+    alert(player2.name + "'s total score: " + player2.totalScore );
     if(player2.totalScore >= 20){
       win = false;
+      alert(player2.name + " win!!");
       break;
     }
   }while(player1.totalScore < 20  && player2.totalScore < 20);
+
 
 });
