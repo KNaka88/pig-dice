@@ -11,17 +11,29 @@
   <body>
     <div class="container">
       <h1>Pig Dice</h1>
+
+      <!-- Initial Display  -->
       <div id="start-menu">
         <h2>How many players?</h2>
         <button id="playByOne" class="btn btn-info">One</button>
-        <button id="playByOne" class="btn btn-success">Two</button>
+        <button id="playByTwo" class="btn btn-success">Two</button>
+      </div>
+      <!--Second Display  -->
+      <div id="entry-form">
         <form id="nameInput">
           <label for="name1" >Player1</label>
           <input id="name1" class="form-control" placeholder="Input your name">
 
-          <label for="name1" >Player2</label>
-          <input id="name2" class="form-control" placeholder="Input your name">
+          <div id="computerName">
+            <label for="compName" >Computer</label>
+            <input id="compName" class="form-control" placeholder="Input a name">
+          </div>
 
+
+          <div id="player2">
+            <label for="name1" >Player2</label>
+            <input id="name2" class="form-control" placeholder="Input your name">
+          </div>
 
           <label for="playTo" >Whay number you like to play to?</label>
           <input id="playTo" class="form-control" placeholder="Input number" type="number">

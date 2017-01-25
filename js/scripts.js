@@ -39,44 +39,53 @@ $(document).ready(function(){
     this.totalScore = 0;
   }
 
-
-  //Player Object (get name from user input)
-$("form#nameInput").submit(function(event) {
-  var namePlayer1 = $("#name1").val();
-  var namePlayer2 = $("#name2").val();
-  var playTo = parseInt($("#playTo").val());
-  alert(playTo);
-
-  var player1 = new Player(namePlayer1);
-  var player2 = new Player(namePlayer2);
-
-  do {
-    //player1
-    alert(player1.name + ", your turn.");
-    player1.totalScore += rollLoop();
-    alert(player1.name + "'s total score: " + player1.totalScore );
-    if(player1.totalScore >= playTo){
-      win = false;
-      alert(player1.name + " win!!");
-      break;
-    }
-
-    //player2
-    alert(player2.name + ", your turn.");
-    player2.totalScore += rollLoop();
-    alert(player2.name + "'s total score: " + player2.totalScore );
-    if(player2.totalScore >= playTo){
-      win = false;
-      alert(player2.name + " win!!");
-      break;
-    }
-  }while(player1.totalScore < playTo  && player2.totalScore < playTo);
+  //Computer function
+  function Robot(Player, skills){
+    this.Player = Player;
+    this.skills = skills;
+  }
 
 
+//////
+  $("#playByOne").click(function(){
+      $("#start-menu").hide();
+      $("#entry-form").show();
+      $("#player2").hide();
 
+      $("form#nameInput").submit(function(event) {
+        var namePlayer1 = $("#name1").val();
+        var namePlayer2 = $("#name2").val();
+        var nameComputer = $("#compName").val();
+        var playTo = parseInt($("#playTo").val());
+        alert(playTo);
 
-  event.preventDefault();
-})
+        var player1 = new Player(namePlayer1);
+        var player2 = new Player(namePlayer2);
+
+        playGame(player1, player2, playTo);
+        event.preventDefault();
+      });
+  });
+
+  $("#playByTwo").click(function(){
+    $("#start-menu").hide();
+    $("#entry-form").show();
+    $("#computerName").hide();
+
+    $("form#nameInput").submit(function(event) {
+      var namePlayer1 = $("#name1").val();
+      var namePlayer2 = $("#name2").val();
+      var nameComputer = $("#compName").val();
+      var playTo = parseInt($("#playTo").val());
+      alert(playTo);
+
+      var player1 = new Player(namePlayer1);
+      var player2 = new Player(namePlayer2);
+
+      playGame(player1, player2, playTo);
+      event.preventDefault();
+    });
+  });
 
 
 
@@ -85,8 +94,33 @@ $("form#nameInput").submit(function(event) {
     return 1 + Math.floor(Math.random() * 6);
   }
 
+//play game function
+  var playGame = function(player1, player2, playTo){
+      do {
+        //player1
+        alert(player1.name + ", your turn.");
+        player1.totalScore += rollLoop();
+        alert(player1.name + "'s total score: " + player1.totalScore );
+        if(player1.totalScore >= playTo){
+          win = false;
+          alert(player1.name + " win!!");
+          break;
+        }
 
+        //player2
+        alert(player2.name + ", your turn.");
+        player2.totalScore += rollLoop();
+        alert(player2.name + "'s total score: " + player2.totalScore );
+        if(player2.totalScore >= playTo){
+          win = false;
+          alert(player2.name + " win!!");
+          break;
+        }
+      }while(player1.totalScore < playTo  && player2.totalScore < playTo);
 
+  };
+
+event.preventDefault();
 
 
   //User Interface Logics
