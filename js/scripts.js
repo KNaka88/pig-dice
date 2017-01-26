@@ -23,13 +23,11 @@ $(document).ready(function(){
         rollTotal = 0;
         hold = false;
         break;
-      }else if(player2.skills === "easy"){
+      }else if(player2.skills === "ambitious"){
         console.log("Player1 TotalScore " + player1.totalScore);
-        console.log("Player2 Score Logic " + (rollTotal + player2.totalScore) );
-        console.log("if(player1 total score <= player2 total score?: " + player1.totalScore <= (rollTotal + player2.totalScore))
-        easy(player1, player2);
-
-
+        console.log("Player2 Score Logic " + rollTotal );
+        console.log( 5 >= rollTotal)
+        ambitious(player1, player2);
       }else{
         hold = confirm("Do you want to conitinue?");
       }
@@ -91,7 +89,7 @@ $(document).ready(function(){
         var namePlayer1 = $("#name1").val();
         var namePlayer2 = $("#name2").val();
         var nameComputer = $("#compName").val();
-        var computerSkill = "easy";
+        var computerSkill = "ambitious";
         var playTo = parseInt($("#playTo").val());
         alert(playTo);
 
@@ -123,12 +121,32 @@ $(document).ready(function(){
     });
   });
 
+
+//////////Computer Personality
   var easy = function(player1, player2) {
     if(player1.totalScore <= (rollTotal + player2.totalScore)){
       hold = false;
       alert("Computer chose Hold");
     }
   }
+
+  var safe = function(player1, player2) {
+    if(  5 < rollTotal){
+      hold = false;
+      alert("Computer chose Hold");
+    }
+  }
+
+  var ambitious = function(player1, player2) {
+    if(  10 < rollTotal){
+      hold = false;
+      alert("Computer chose Hold");
+    }
+  }
+
+
+
+///////////////////////
 
 
   //Roll Dice Function
