@@ -23,11 +23,8 @@ $(document).ready(function(){
         rollTotal = 0;
         hold = false;
         break;
-      }else if(player2.skills === "ambitious"){
-        console.log("Player1 TotalScore " + player1.totalScore);
-        console.log("Player2 Score Logic " + rollTotal );
-        console.log( 5 >= rollTotal)
-        ambitious(player1, player2);
+      }else if(player2.skills === "safe" || player2.skills === "competitive" || player2.skills === "ambitious"){
+        choosePersonality(player1, player2);
       }else{
         hold = confirm("Do you want to conitinue?");
       }
@@ -89,13 +86,15 @@ $(document).ready(function(){
         var namePlayer1 = $("#name1").val();
         var namePlayer2 = $("#name2").val();
         var nameComputer = $("#compName").val();
-        var computerSkill = "ambitious";
+        var computerSkill = $("input:radio[name=personality]:checked").val();
+        alert(computerSkill);
         var playTo = parseInt($("#playTo").val());
         alert(playTo);
 
         var player1 = new Player(namePlayer1);
         var player2 = new Player(nameComputer);
         player2.skills = computerSkill;
+        alert(player2.skills);
         playGame(player1, player2, playTo);
         event.preventDefault();
       });
@@ -123,15 +122,16 @@ $(document).ready(function(){
 
 
 //////////Computer Personality
-  var easy = function(player1, player2) {
-    if(player1.totalScore <= (rollTotal + player2.totalScore)){
+
+  var safe = function(player1, player2) {
+    if(  5 < rollTotal){
       hold = false;
       alert("Computer chose Hold");
     }
   }
 
-  var safe = function(player1, player2) {
-    if(  5 < rollTotal){
+  var competitive = function(player1, player2) {
+    if(player1.totalScore <= (rollTotal + player2.totalScore)){
       hold = false;
       alert("Computer chose Hold");
     }
@@ -144,6 +144,21 @@ $(document).ready(function(){
     }
   }
 
+  var choosePersonality = function(player1, player2){
+    switch (player2.skills){
+      case "safe":
+        safe(player1, player2);
+        break;
+      case "competitive":
+        competitive(player1, player2);
+        break;
+      case "ambitious":
+        ambitious(player1, player2);
+        break;
+      default:
+        return false;
+    }
+  }
 
 
 ///////////////////////
@@ -179,6 +194,7 @@ $(document).ready(function(){
       }while(player1.totalScore < playTo  && player2.totalScore < playTo);
 
   };
+
 
 
 
