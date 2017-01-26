@@ -1,3 +1,44 @@
+body {
+  display:block;
+  width:70%;
+  margin: 50px auto;
+}
 #entry-form {
   display: none;
+}
+
+.jumbotron {
+  background-color: #FFCC93;
+}
+
+h1 {
+  font-size: 5rem;
+  text-align: center;
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+#main-display {
+  background-color:#CFBF6B;
+}
+
+#nameInput{
+  display: block;
+  width: 70%;
+  margin: 20px auto;
+
+}
+
+
+#start-menu {
+  text-align: center;
+  margin-top: 5%;
+
+}
+
+#start-menu button {
+
+  width: 20%;
+  height: 20%;
+  margin: 3%;
+
 }

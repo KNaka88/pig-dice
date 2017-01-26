@@ -76,7 +76,7 @@ $(document).ready(function(){
   // }
 
 
-//////
+//////Sole Game
   $("#playByOne").click(function(){
       $("#start-menu").hide();
       $("#entry-form").show();
@@ -100,10 +100,12 @@ $(document).ready(function(){
       });
   });
 
+//Multi Player Game
   $("#playByTwo").click(function(){
     $("#start-menu").hide();
     $("#entry-form").show();
     $("#computerName").hide();
+    $("#personalities").hide();
 
     $("form#nameInput").submit(function(event) {
       var namePlayer1 = $("#name1").val();
