@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 
   //Roll Loop Function
-  var rollLoop = function(){
+  var rollLoop = function(player2){
     rollTotal = 0;
 
     do{
@@ -22,8 +22,14 @@ $(document).ready(function(){
         rollTotal = 0;
         hold = !hold;
         break;
+
       }else{
         hold = confirm("Do you want to conitinue?");
+      }
+      console.log(player2.skills);
+      if(toString(player2.skills) === "Hard"){
+        alert("I am robot");
+
       }
     } while(hold)
 
@@ -37,13 +43,15 @@ $(document).ready(function(){
   function Player(name){
     this.name = name;
     this.totalScore = 0;
+    this.skills = "";
   }
 
-  //Computer function
-  function Robot(Player, skills){
-    this.Player = Player;
-    this.skills = skills;
-  }
+  // //Computer function
+  // function Robot(name, skills){
+  //   this.name = name;
+  //   this.totalScore = 0;
+  //
+  // }
 
 
 //////
@@ -56,12 +64,14 @@ $(document).ready(function(){
         var namePlayer1 = $("#name1").val();
         var namePlayer2 = $("#name2").val();
         var nameComputer = $("#compName").val();
+        var computerSkill = "Hard";
         var playTo = parseInt($("#playTo").val());
         alert(playTo);
 
         var player1 = new Player(namePlayer1);
-        var player2 = new Player(namePlayer2);
-
+        var player2 = new Player(nameComputer);
+        player2.skills = computerSkill;
+        alert(player2.skills)
         playGame(player1, player2, playTo);
         event.preventDefault();
       });
@@ -99,7 +109,7 @@ $(document).ready(function(){
       do {
         //player1
         alert(player1.name + ", your turn.");
-        player1.totalScore += rollLoop();
+        player1.totalScore += rollLoop(player2);
         alert(player1.name + "'s total score: " + player1.totalScore );
         if(player1.totalScore >= playTo){
           win = false;
@@ -109,7 +119,7 @@ $(document).ready(function(){
 
         //player2
         alert(player2.name + ", your turn.");
-        player2.totalScore += rollLoop();
+        player2.totalScore += rollLoop(player2);
         alert(player2.name + "'s total score: " + player2.totalScore );
         if(player2.totalScore >= playTo){
           win = false;
@@ -120,10 +130,7 @@ $(document).ready(function(){
 
   };
 
-event.preventDefault();
 
-
-  //User Interface Logics
 
 
 
