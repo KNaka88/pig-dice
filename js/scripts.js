@@ -7,9 +7,8 @@ $(document).ready(function(){
   var win = true;
 
 
-
   //Roll Loop Function
-  var rollLoop = function(player2){
+  var rollLoop = function(player1, player2){
     rollTotal = 0;
 
     do{
@@ -22,8 +21,9 @@ $(document).ready(function(){
         rollTotal = 0;
         hold = !hold;
         break;
-      }else if(player2.skills === "Hard"){
-        hold = false;
+      }else if(player2.skills === "easy"){
+        alert("easy function");
+        easy(player1, player2);
         alert("Computer chose Hold");
 
       }else{
@@ -62,7 +62,7 @@ $(document).ready(function(){
         var namePlayer1 = $("#name1").val();
         var namePlayer2 = $("#name2").val();
         var nameComputer = $("#compName").val();
-        var computerSkill = "Hard";
+        var computerSkill = "easy";
         var playTo = parseInt($("#playTo").val());
         alert(playTo);
 
@@ -94,6 +94,11 @@ $(document).ready(function(){
     });
   });
 
+  var easy = function(player1, player2) {
+    if(player1.totalScore >= player2.totalScore) {
+      hold = !hold
+    }
+  }
 
 
   //Roll Dice Function
@@ -106,7 +111,7 @@ $(document).ready(function(){
       do {
         //player1
         alert(player1.name + ", your turn.");
-        player1.totalScore += rollLoop(player1);
+        player1.totalScore += rollLoop(player1, player2);
         alert(player1.name + "'s total score: " + player1.totalScore );
         if(player1.totalScore >= playTo){
           win = false;
@@ -116,7 +121,7 @@ $(document).ready(function(){
 
         //player2
         alert(player2.name + ", your turn.");
-        player2.totalScore += rollLoop(player2);
+        player2.totalScore += rollLoop(player1, player2);
         alert(player2.name + "'s total score: " + player2.totalScore );
         if(player2.totalScore >= playTo){
           win = false;
