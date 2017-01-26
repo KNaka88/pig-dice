@@ -5,13 +5,15 @@ $(document).ready(function(){
   var rollTotal = 0;
   var hold = true;
   var win = true;
+  //var temporaryRollTotal = 0;
 
 
-  //Roll Loop Function
-  var rollLoop = function(player1, player2){
+  var comRollLoop = function(player1, player2){
     rollTotal = 0;
+    alert("comRollLoop called");
 
     do{
+      hold = true;
       temporaryScore = rollDice();
       alert(temporaryScore);
 
@@ -19,12 +21,39 @@ $(document).ready(function(){
 
       if(temporaryScore === 1 ){
         rollTotal = 0;
-        hold = !hold;
+        hold = false;
         break;
       }else if(player2.skills === "easy"){
-        alert("easy function");
+        console.log("Player1 TotalScore " + player1.totalScore);
+        console.log("Player2 Score Logic " + (rollTotal + player2.totalScore) );
+        console.log("if(player1 total score <= player2 total score?: " + player1.totalScore <= (rollTotal + player2.totalScore))
         easy(player1, player2);
-        alert("Computer chose Hold");
+
+
+      }else{
+        hold = confirm("Do you want to conitinue?");
+      }
+    } while(hold)
+
+    alert("Roll Total:" + rollTotal);
+    return rollTotal;
+  }
+  //Roll Loop Function
+  var playerRollLoop = function(){
+    rollTotal = 0;
+        alert("playerRollLoop called");
+
+    do{
+      hold = true;
+      temporaryScore = rollDice();
+      alert(temporaryScore);
+
+      rollTotal += temporaryScore;
+
+      if(temporaryScore === 1 ){
+        rollTotal = 0;
+        hold = false;
+        break;
 
       }else{
         hold = confirm("Do you want to conitinue?");
@@ -95,8 +124,9 @@ $(document).ready(function(){
   });
 
   var easy = function(player1, player2) {
-    if(player1.totalScore >= player2.totalScore) {
-      hold = !hold
+    if(player1.totalScore <= (rollTotal + player2.totalScore)){
+      hold = false;
+      alert("Computer chose Hold");
     }
   }
 
@@ -111,7 +141,7 @@ $(document).ready(function(){
       do {
         //player1
         alert(player1.name + ", your turn.");
-        player1.totalScore += rollLoop(player1, player2);
+        player1.totalScore += playerRollLoop();
         alert(player1.name + "'s total score: " + player1.totalScore );
         if(player1.totalScore >= playTo){
           win = false;
@@ -121,7 +151,7 @@ $(document).ready(function(){
 
         //player2
         alert(player2.name + ", your turn.");
-        player2.totalScore += rollLoop(player1, player2);
+        player2.totalScore += comRollLoop(player1, player2);
         alert(player2.name + "'s total score: " + player2.totalScore );
         if(player2.totalScore >= playTo){
           win = false;
